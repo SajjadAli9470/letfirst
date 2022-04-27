@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:firstproject/pages/login_page.dart';
+import 'package:firstproject/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 // ignore: unused_import
@@ -29,8 +30,10 @@ class MyApp extends StatelessWidget {
         fontFamily: GoogleFonts.lato().fontFamily,
         primaryTextTheme: GoogleFonts.latoTextTheme(),
       ),
+      debugShowCheckedModeBanner: false,
       routes: {
         "/": (context) => LoginPage(),
+        MyRoutes.homeRoute: (context) => HomePage()
         // "/Login": (context) => LoginPage()
       },
       // themeMode: ThemeMode.light,
