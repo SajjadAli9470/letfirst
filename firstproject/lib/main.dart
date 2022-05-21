@@ -34,9 +34,7 @@ class MyApp extends StatelessWidget {
         MyRoutes.homeRoute: (context) => HomePage()
         // "/Login": (context) => LoginPage()
       },
-      // themeMode: ThemeMode.light,
-      // darkTheme: ThemeData(brightness: Brightness.dark),
-      // theme: ThemeData(primarySwatch: Colors.teal),
+
     );
   }
 }
