@@ -5,17 +5,31 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "firstproject",
-            "cwd": "firstproject",
+            "name": "sawaatuell",
+            "cwd": "sawaatuell",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart"
+        },
+        {
+            "name": "JetApp",
+            "cwd": "JetApp",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart"
+        },
+        
+        {
+            "name": "chatapp",
+            "cwd": "chatapp",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "firstproject (profile mode)",
+            "name": "firstproject",
             "cwd": "firstproject",
             "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
+            "type": "dart"
         }
     ]
 }

@@ -1,5 +1,11 @@
+import 'package:flutter/rendering.dart';
+
+class CatalogModel {
+  static List<Item> items = [];
+}
+
 class Item {
-  final String id;
+  final int id;
   final String name;
   final String desc;
   final num price;
@@ -13,17 +19,23 @@ class Item {
       required this.price,
       required this.color,
       required this.image});
-}
 
-class CatalogModel {
-  static final items = [
-    Item(
-        id: "001",
-        name: "iPhone 12 pro",
-        desc: "iPhone of 12 Generation",
-        price: 70000,
-        color: "#33505a",
-        image:
-            "https://m-cdn.phonearena.com/images/phones/81071-350/Apple-iPhone-12-Pro-Max.jpg")
-  ];
+  factory Item.fromMap(Map<String, dynamic> map) {
+    return Item(
+        id: map["id"],
+        name: map["name"],
+        desc: map["desc"],
+        price: map["price"],
+        color: map["color"],
+        image: map["image"]);
+  }
+
+  toMap() => {
+        "id": id,
+        "name": name,
+        "desc": desc,
+        "price": price,
+        "color": color,
+        "image": image,
+      };
 }
