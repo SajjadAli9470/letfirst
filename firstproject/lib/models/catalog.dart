@@ -1,5 +1,3 @@
-import 'package:flutter/rendering.dart';
-
 class CatalogModel {
   static List<Item> items = [];
 }
@@ -11,6 +9,7 @@ class Item {
   final num price;
   final String color;
   final String image;
+  final String detail;
 
   Item(
       {required this.id,
@@ -18,7 +17,8 @@ class Item {
       required this.desc,
       required this.price,
       required this.color,
-      required this.image});
+      required this.image,
+      required this.detail});
 
   factory Item.fromMap(Map<String, dynamic> map) {
     return Item(
@@ -27,7 +27,8 @@ class Item {
         desc: map["desc"],
         price: map["price"],
         color: map["color"],
-        image: map["image"]);
+        image: map["image"],
+        detail: map["detail"]);
   }
 
   toMap() => {
@@ -37,5 +38,6 @@ class Item {
         "price": price,
         "color": color,
         "image": image,
+        "detail":detail,
       };
 }

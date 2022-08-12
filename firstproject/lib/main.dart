@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firstproject/pages/cart_page.dart';
 import 'package:firstproject/pages/login_page.dart';
 import 'package:firstproject/utils/routes.dart';
 import 'package:firstproject/widgets/themes.dart';
@@ -30,11 +31,11 @@ class MyApp extends StatelessWidget {
       darkTheme: MyTheme.darkTheme(context),
       debugShowCheckedModeBanner: false,
       routes: {
-        "/": (context) => LoginPage(),
-        MyRoutes.homeRoute: (context) => HomePage()
-        // "/Login": (context) => LoginPage()
+        "/": (context) => HomePage(),
+        MyRoutes.homeRoute: (context) => HomePage(),
+        MyRoutes.loginRoute: (context) => LoginPage(),
+        MyRoutes.cartRoute: (context) => cartPage()
       },
-
     );
   }
 }
