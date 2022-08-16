@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firstproject/models/cart.dart';
 import 'package:firstproject/pages/home_page_detail.dart';
 import 'package:firstproject/widgets/themes.dart';
 import 'package:flutter/material.dart';
@@ -47,21 +48,21 @@ class CatalogItem extends StatelessWidget {
     // final textTheme = theme.textTheme;
     return Container(
       decoration: BoxDecoration(
-        color: MyTheme.creamcolor,
+        // color: MyTheme.creamcolor,
         borderRadius: BorderRadius.circular(10),
       ),
       padding: EdgeInsets.only(top: 10, left: 10, bottom: 10, right: 10),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).canvasColor,
           borderRadius: BorderRadius.circular(10),
         ),
         padding: EdgeInsets.only(top: 5, left: 10, bottom: 5),
         child: Row(
           children: [
             Hero(
-              tag: Key(catalog.id.toString()),
-              child: CatalogImage(image: catalog.image)),
+                tag: Key(catalog.id.toString()),
+                child: CatalogImage(image: catalog.image)),
             Expanded(
                 child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +72,7 @@ class CatalogItem extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
-                    color: MyTheme.darkBluishColor,
+                    color: Theme.of(context).accentColor,
                   ),
                 ),
                 Text(catalog.desc, style: Theme.of(context).textTheme.caption),
@@ -85,15 +86,9 @@ class CatalogItem extends StatelessWidget {
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
-                    ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                MyTheme.darkBluishColor),
-                            shape: MaterialStateProperty.all(
-                              StadiumBorder(),
-                            )),
-                        child: Text("Buy"))
+                    _AddtoCart(
+                      catalog: catalog,
+                    )
                   ],
                 )
               ],
@@ -101,6 +96,53 @@ class CatalogItem extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _AddtoCart extends StatefulWidget {
+  final Item catalog;
+  const _AddtoCart({
+    Key? key,
+    required this.catalog,
+  }) : super(key: key);
+
+  @override
+  State<_AddtoCart> createState() => _AddtoCartState();
+}
+
+class _AddtoCartState extends State<_AddtoCart> {
+  bool isAdded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        if (isAdded == true) {
+          isAdded = false;
+        } else if (isAdded == false) {
+          isAdded = true;
+        }
+        final _catalog = CatalogModel();
+        final _cart = CartModel();
+        _cart.catalog = _catalog;
+
+        _cart.add(widget.catalog);
+
+        setState(() {});
+      },
+      style: ButtonStyle(
+          backgroundColor:
+              MaterialStateProperty.all(Theme.of(context).buttonColor),
+          shape: MaterialStateProperty.all(
+            StadiumBorder(),
+          )),
+      child: isAdded
+          ? Icon(Icons.done)
+          : Text(
+              "Add to Cart",
+              style: TextStyle(color: Colors.white),
+            ),
     );
   }
 }

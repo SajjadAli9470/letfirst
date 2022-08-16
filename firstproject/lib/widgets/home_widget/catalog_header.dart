@@ -16,7 +16,7 @@ class CatalogHeader extends StatelessWidget {
           style: TextStyle(
               fontSize: 45,
               fontWeight: FontWeight.bold,
-              color: MyTheme.darkBluishColor),
+              color: Theme.of(context).accentColor),
         ),
         Text(
           "Trending Products",

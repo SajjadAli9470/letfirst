@@ -16,9 +16,9 @@ class HomeDetailPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
       ),
-      backgroundColor: MyTheme.creamcolor,
+      backgroundColor: Theme.of(context).cardColor,
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: Theme.of(context).canvasColor,
         child: ButtonBar(
           alignment: MainAxisAlignment.spaceBetween,
           buttonPadding:
@@ -30,19 +30,19 @@ class HomeDetailPage extends StatelessWidget {
                   fontWeight: FontWeight.bold, fontSize: 25, color: Colors.red),
             ),
             SizedBox(
-              width: 100,
+              width: 140,
               height: 50,
               child: ElevatedButton(
                 onPressed: () {},
                 style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(MyTheme.darkBluishColor),
+                    backgroundColor: MaterialStateProperty.all(
+                        Theme.of(context).buttonColor),
                     shape: MaterialStateProperty.all(
                       const StadiumBorder(),
                     )),
                 child: const Text(
-                  "Buy",
-                  style: const TextStyle(fontSize: 16),
+                  "Add to Cart",
+                  style: const TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),
             )
@@ -53,35 +53,41 @@ class HomeDetailPage extends StatelessWidget {
         bottom: false,
         child: Column(
           children: [
-            const Padding(padding: const EdgeInsets.all(8)),
-            Center(
-              child: Hero(
-                  tag: Key(catalog.id.toString()),
-                  child: Image.network(
-                    catalog.image,
-                    height: 300,
-                  )),
+            const Padding(
+                padding:
+                    const EdgeInsets.only(left: 10, right: 10, bottom: 25)),
+            Container(
+              margin: EdgeInsets.only(bottom: 30),
+              child: Center(
+                child: Hero(
+                    tag: Key(catalog.id.toString()),
+                    child: Image.network(
+                      catalog.image,
+                      width: 250,
+                      height: 250,
+                    )),
+              ),
             ),
             Expanded(
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.vertical(
-                      top: Radius.elliptical(
-                          MediaQuery.of(context).size.width, 80)),
+                  color: Theme.of(context).canvasColor,
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.elliptical(50, 50)),
+                  // MediaQuery.of(context).size.width replace with 50
                 ),
                 child: Column(
                   children: [
                     const Padding(
-                        padding:
-                            const EdgeInsets.only(left: 10, right: 10, top: 5)),
+                        padding: const EdgeInsets.only(
+                            left: 10, right: 10, top: 10)),
                     Text(
                       catalog.name,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
-                        color: MyTheme.darkBluishColor,
+                        color: Theme.of(context).accentColor,
                       ),
                     ),
                     Text(

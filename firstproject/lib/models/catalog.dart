@@ -1,5 +1,14 @@
+import 'dart:convert';
+
 class CatalogModel {
+  static final catModel = CatalogModel._internal();
+  CatalogModel._internal();
+  factory CatalogModel() => catModel;
   static List<Item> items = [];
+  // get by id
+  Item getById(int id) =>
+      items.firstWhere((element) => element.id == id, orElse: null);
+  Item getByPosition(int pos) => items[pos];
 }
 
 class Item {
@@ -38,6 +47,6 @@ class Item {
         "price": price,
         "color": color,
         "image": image,
-        "detail":detail,
+        "detail": detail,
       };
 }

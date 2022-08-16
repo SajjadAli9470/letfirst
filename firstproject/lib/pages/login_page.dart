@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:firstproject/utils/routes.dart';
+import 'package:firstproject/widgets/themes.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -31,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: Theme.of(context).cardColor,
       child: SingleChildScrollView(
         child: Form(
           key: _formKey,
@@ -45,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 20.0,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16 , horizontal: 32),
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
               child: Column(
                 children: [
                   Text(
@@ -62,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "Username cannot be empty";
-                      } 
+                      }
                       return null;
                     },
                     onChanged: (value) {
@@ -109,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                                   fontSize: 18),
                             ),
                       decoration: BoxDecoration(
-                        color: Colors.deepPurple,
+                        color: MyTheme.lightBluishColor,
                         shape:
                             changeButton ? BoxShape.circle : BoxShape.rectangle,
                         // borderRadius: BorderRadius.circular(50)),
