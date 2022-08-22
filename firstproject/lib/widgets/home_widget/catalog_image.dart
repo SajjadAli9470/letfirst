@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/themes.dart';
 
 class CatalogImage extends StatelessWidget {
   final String image;
@@ -20,8 +18,8 @@ class CatalogImage extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: Theme.of(context).cardColor,
       ),
-      margin: EdgeInsets.all(7),
-      padding: EdgeInsets.only(top: 8, left: 8, bottom: 8, right: 8),
+      margin: const EdgeInsets.all(7),
+      padding: const EdgeInsets.only(top: 8, left: 8, bottom: 8, right: 8),
     );
   }
 }

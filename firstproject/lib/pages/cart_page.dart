@@ -12,7 +12,8 @@ class cartPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         title: Text(
           "Cart",
-          style: TextStyle(color: Theme.of(context).accentColor, fontSize: 25),
+          style: TextStyle(
+              color: Theme.of(context).colorScheme.secondary, fontSize: 25),
         ),
       ),
       body: Column(
@@ -20,7 +21,7 @@ class cartPage extends StatelessWidget {
           Expanded(
             child: _CartList(),
           ),
-          Divider(),
+          const Divider(),
           _CartTotal(),
         ],
       ),
@@ -40,8 +41,8 @@ class _CartTotal extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Text(
-            "\$${_cart.totalPrice}",
-            style: TextStyle(
+            "\$${_cart.totalPrice()}",
+            style: const TextStyle(
               fontSize: 40,
               fontWeight: FontWeight.bold,
             ),
@@ -52,7 +53,7 @@ class _CartTotal extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Buying is not Supported yet.")),
+                  const SnackBar(content: Text("Buying is not Supported yet.")),
                 );
               },
               style: ButtonStyle(
@@ -63,7 +64,7 @@ class _CartTotal extends StatelessWidget {
                   )),
               child: const Text(
                 "Buy",
-                style: const TextStyle(fontSize: 20, color: Colors.white),
+                style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
           )
@@ -73,32 +74,36 @@ class _CartTotal extends StatelessWidget {
   }
 }
 
-class _CartList extends StatefulWidget {
-  const _CartList({Key? key}) : super(key: key);
-
-  @override
-  State<_CartList> createState() => _CartListState();
-}
-
-class _CartListState extends State<_CartList> {
+class _CartList extends StatelessWidget {
   final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: _cart.items?.length,
-      itemBuilder: (context, index) => ListTile(
-        leading: Icon(Icons.done),
-        trailing: IconButton(
-          icon: const Icon(Icons.remove_circle_outline),
-          onPressed: () => {},
-        ),
-        title: Text(
-          _cart.items[index].name,
-          style: TextStyle(
-            fontSize: 20,
-          ),
-        ),
-      ),
-    );
+    return _cart.items.isEmpty
+        ? const Center(
+            child: Text(
+            "Nothing to show",
+            style: TextStyle(
+              fontSize: 30,
+            ),
+          ))
+        : ListView.builder(
+            itemCount: _cart.items.length,
+            itemBuilder: (context, index) => ListTile(
+              leading: const Icon(Icons.done),
+              trailing: IconButton(
+                icon: const Icon(Icons.remove_circle_outline),
+                onPressed: () => {
+                  _cart.remove(_cart.items[index]),
+                  // setState(() {})
+                },
+              ),
+              title: Text(
+                _cart.items[index].name,
+                style: const TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+          );
   }
 }

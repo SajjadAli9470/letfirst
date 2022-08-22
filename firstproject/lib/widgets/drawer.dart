@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final imageUrl =
+    const imageUrl =
         "https://mpng.subpng.com/20180719/let/kisspng-computer-icons-clip-art-man-side-face-5b515793d25650.5221354215320574918616.jpg";
     return Drawer(
         child: Container(
       color: Colors.deepPurple,
       child: ListView(
-        children: [
+        children: const [
           DrawerHeader(
             padding: EdgeInsets.zero,
             child: UserAccountsDrawerHeader(

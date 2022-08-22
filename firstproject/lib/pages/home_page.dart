@@ -1,15 +1,12 @@
 // ignore_for_file: must_be_immutable, avoid_unnecessary_containers, use_key_in_widget_constructors
 
 import 'package:firstproject/utils/routes.dart';
-import 'package:firstproject/widgets/themes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/catalog.dart';
-import '../widgets/drawer.dart';
 import '../widgets/home_widget/catalog_header.dart';
 import '../widgets/home_widget/catalog_list.dart';
-import '../widgets/item_widget.dart';
 import 'dart:convert';
 
 class HomePage extends StatefulWidget {
@@ -27,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     final catalogJson =
         await rootBundle.loadString("assets/files/catalog.json");
     final decodedData = jsonDecode(catalogJson);
@@ -48,22 +45,22 @@ class _HomePageState extends State<HomePage> {
           Navigator.pushNamed(context, MyRoutes.cartRoute),
         },
         backgroundColor: Theme.of(context).buttonColor,
-        child: Icon(
+        child: const Icon(
           CupertinoIcons.cart,
           color: Colors.white,
         ),
       ),
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CatalogHeader(),
-              if (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
-                CatalogList()
+              const CatalogHeader(),
+              if (CatalogModel.items.isNotEmpty)
+                const CatalogList()
               else
-                Expanded(
+                const Expanded(
                   child: Center(
                     child: CircularProgressIndicator(),
                   ),
