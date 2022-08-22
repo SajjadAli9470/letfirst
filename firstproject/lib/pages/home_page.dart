@@ -1,13 +1,17 @@
 // ignore_for_file: must_be_immutable, avoid_unnecessary_containers, use_key_in_widget_constructors
 
+import 'package:firstproject/core/store.dart';
+import 'package:firstproject/models/cart.dart';
 import 'package:firstproject/utils/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:velocity_x/velocity_x.dart';
 import '../models/catalog.dart';
 import '../widgets/home_widget/catalog_header.dart';
 import '../widgets/home_widget/catalog_list.dart';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,6 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String name = "Sajjad Ali";
+  final url = "https://api.jsonbin.io/v3/b/6303215f5c146d63ca79fdf8";
   @override
   void initState() {
     // TODO: implement initState
@@ -25,6 +30,9 @@ class _HomePageState extends State<HomePage> {
 
   loadData() async {
     await Future.delayed(const Duration(seconds: 2));
+    // final response = await http.get(Uri.parse(url));
+    // print(response.body);
+    // final catalogJson = response.body;
     final catalogJson =
         await rootBundle.loadString("assets/files/catalog.json");
     final decodedData = jsonDecode(catalogJson);
@@ -37,18 +45,29 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final _cart = (VxState.store as MyStore).cart;
     // final dummyList = List.generate(10, (index) => CatalogModel.items[0]);
     return Scaffold(
       backgroundColor: Theme.of(context).cardColor,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => {
-          Navigator.pushNamed(context, MyRoutes.cartRoute),
-        },
-        backgroundColor: Theme.of(context).buttonColor,
-        child: const Icon(
-          CupertinoIcons.cart,
-          color: Colors.white,
-        ),
+      floatingActionButton: VxBuilder(
+        mutations: {AddMutation, RemoveMutation},
+        builder: (context, dynamic, _) => FloatingActionButton(
+          onPressed: () => {
+            Navigator.pushNamed(context, MyRoutes.cartRoute),
+          },
+          backgroundColor: Theme.of(context).buttonColor,
+          child: const Icon(
+            CupertinoIcons.cart,
+            color: Colors.white,
+          ),
+        ).badge(
+            color: Theme.of(context).canvasColor,
+            size: 20,
+            count: _cart.items.length,
+            textStyle: TextStyle(
+              color: Theme.of(context).accentColor,
+              fontWeight: FontWeight.bold,
+            )),
       ),
       body: SafeArea(
         child: Container(

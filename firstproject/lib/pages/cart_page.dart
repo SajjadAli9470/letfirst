@@ -1,5 +1,7 @@
 import 'package:firstproject/models/cart.dart';
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
+import '../core/store.dart';
 
 class cartPage extends StatelessWidget {
   const cartPage({Key? key}) : super(key: key);
@@ -30,7 +32,7 @@ class cartPage extends StatelessWidget {
 }
 
 class _CartTotal extends StatelessWidget {
-  final _cart = CartModel();
+  final CartModel _cart = (VxState.store as MyStore).cart;
   // const _CartTotal({Key? key}) : super(key: key);
 
   @override
@@ -40,12 +42,18 @@ class _CartTotal extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(
-            "\$${_cart.totalPrice()}",
-            style: const TextStyle(
-              fontSize: 40,
-              fontWeight: FontWeight.bold,
-            ),
+          VxConsumer(
+            notifications: {},
+            mutations: {RemoveMutation},
+            builder: (context, dynamic, _) {
+              return Text(
+                "\$${_cart.totalPrice()}",
+                style: const TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                ),
+              );
+            },
           ),
           SizedBox(
             width: 140,
@@ -75,9 +83,10 @@ class _CartTotal extends StatelessWidget {
 }
 
 class _CartList extends StatelessWidget {
-  final _cart = CartModel();
+  final CartModel _cart = (VxState.store as MyStore).cart;
   @override
   Widget build(BuildContext context) {
+    VxState.watch(context, on: [RemoveMutation]);
     return _cart.items.isEmpty
         ? const Center(
             child: Text(
@@ -93,7 +102,7 @@ class _CartList extends StatelessWidget {
               trailing: IconButton(
                 icon: const Icon(Icons.remove_circle_outline),
                 onPressed: () => {
-                  _cart.remove(_cart.items[index]),
+                  RemoveMutation(_cart.items[index]),
                   // setState(() {})
                 },
               ),
