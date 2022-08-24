@@ -11,7 +11,7 @@ import '../models/catalog.dart';
 import '../widgets/home_widget/catalog_header.dart';
 import '../widgets/home_widget/catalog_list.dart';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   @override
@@ -20,7 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String name = "Sajjad Ali";
-  final url = "https://api.jsonbin.io/v3/b/6303215f5c146d63ca79fdf8";
+  // final url = "https://api.jsonbin.io/v3/b/6303215f5c146d63ca79fdf8";
   @override
   void initState() {
     // TODO: implement initState
